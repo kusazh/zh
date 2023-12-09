@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kusa 草</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: sans-serif;
+        font-size: 2rem;
+      }
+      table {
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+      }
+      td {
+        width: 30%;
+        vertical-align: middle;
+        transition: opacity 0.5s ease;
+      }
+      .right {
+        text-align: right;
+      }
+      .small {
+        width: 20%;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td id="kusa">kusa</td>
+        <td class="small" id="suffix"></td>
+        <td class="right" id="kusa-cn">草</td>
+        <td class="right small" id="suffix-cn"></td>
+      </tr>
+    </table>
+
+    <script>
+      const d = {
+        kusa: ["草", "臭", "苦洒", "酷颯", "💩"],
+        suffix: ["", "zh", "i"],
+        zh: ["張", "支", "之", "紙", "🇨🇳"],
+        i: ["い", "的", "矣", "味", "人工智慧"],
+        "": [""],
+      };
+
+      function changeText(e, text) {
+        if (e.innerText !== text) {
+          e.style.opacity = "0";
+          setTimeout(() => {
+            e.innerText = text;
+            e.style.opacity = "1";
+          }, 500);
+        }
+      }
+
+      function main() {
+        const randomSuffix =
+          d.suffix[Math.floor(Math.random() * d.suffix.length)];
+        const randomKusaCn =
+          d.kusa[Math.floor(Math.random() * d.kusa.length)];
+        const randomSuffixCn =
+          d[randomSuffix][Math.floor(Math.random() * d[randomSuffix].length)];
+
+        changeText(document.getElementById("suffix"), randomSuffix);
+        changeText(document.getElementById("kusa-cn"), randomKusaCn);
+        changeText(document.getElementById("suffix-cn"), randomSuffixCn);
+
+        document.title = `kusa${randomSuffix} ${randomKusaCn}${randomSuffixCn}`;
+      }
+
+      setInterval(main, 4000);
+    </script>
+  </body>
+</html>
